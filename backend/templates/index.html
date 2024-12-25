@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Twitter Trends</title>
+  </head>
+  <body>
+    <h1>Get Twitter Trends</h1>
+    <button onclick="runScript()">Click here to run the script</button>
+    <div id="results"></div>
+
+    <script>
+      function runScript() {
+        fetch("/run-script")
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("results").innerHTML = `
+                        <h3>These are the most happening topics:</h3>
+                        <ul>
+                            <li>${data.trend1}</li>
+                            <li>${data.trend2}</li>
+                            <li>${data.trend3}</li>
+                            <li>${data.trend4}</li>
+                            <li>${data.trend5}</li>
+                        </ul>
+                        <p>IP Address used: ${data.ip_address}</p>
+                    `;
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+    </script>
+  </body>
+</html>
